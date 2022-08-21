@@ -1,11 +1,15 @@
 # 顺序表的 C 语言实现
+
+
+### Code
+
+```C
 /*
  * 关于线性表的基本操作
  *
  */
 
 
-```C
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -160,4 +164,49 @@ int main (void)
     clear_vector(vec);
     return 0;
 }
+
+
+
+```
+
+
+
+
+
+
+### Result
+
+```bash
+
+[---- VECTOR STATUS]: 
+Vector's current length = 0
+Vector's capacity = 10
+Vector(0) = []
+
+[---- VECTOR STATUS]: 
+Vector's current length = 5
+Vector's capacity = 10
+Vector(5) = [ 0  1  2  3  4 ]
+
+[---- VECTOR STATUS]: 
+Vector's current length = 6
+Vector's capacity = 10
+Vector(6) = [ 69  0  1  2  3  4 ]
+
+[---- VECTOR STATUS]: 
+Vector's current length = 7
+Vector's capacity = 10
+Vector(7) = [ 69  0  1  2  6699  3  4 ]
+
+[---- VECTOR STATUS]: 
+Vector's current length = 6
+Vector's capacity = 10
+Vector(6) = [ 0  1  2  6699  3  4 ]
+
+[---- VECTOR STATUS]: 
+Vector's current length = 5
+Vector's capacity = 10
+Vector(5) = [ 0  1  6699  3  4 ]
+
+the location of 6699 is 2
 ```
