@@ -176,8 +176,7 @@ int main (void)
 
 ### Result
 
-```bash
-
+```txt
 [---- VECTOR STATUS]: 
 Vector's current length = 0
 Vector's capacity = 10
