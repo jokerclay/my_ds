@@ -1,3 +1,5 @@
+# Code
+```c
 /*
  * 从顺序表中删除最小的元素（假设唯一）并由函数返回被删除元素的值，空出的位置由
  * 最后一个元素填补，若顺序表为空，则显示出错误信息并退出运行
@@ -6,7 +8,7 @@
 
 #include <time.h>
 #include <stdbool.h>
-#include "./vector.h"
+#include "../vector.h"
 
 int answer(Vector *vec, int value) {
 
@@ -59,3 +61,29 @@ int main(void)
 
     return 0;
 }
+
+```
+
+
+
+
+
+# Result
+```txt
+
+====> [VECTOR STATUS]: 
+Vector's current length = 10
+Vector's capacity = 10
+Vector(10) = [ 81  35  93  1  6  88  83  34  80  42 ]
+
+====> [VECTOR STATUS]: 
+Vector's current length = 9
+Vector's capacity = 10
+Vector(9) = [ 81  35  93  42  6  88  83  34  80 ]
+
+====> [MIN VALUE]: 1
+
+
+```
+
+
