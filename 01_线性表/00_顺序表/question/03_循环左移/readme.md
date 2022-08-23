@@ -1,120 +1,121 @@
 # Code
 
 ```c
+
 /*
- * 对长度为 n 的顺序表,编写一个时间复杂度为 O(n) 空间复杂度为 O(1) 的算法
- * 该算法删除所有值为 X 的算法
- * 
+ *      循环左移
  */
 
 #include <time.h>
 #include "../vector.h"
-#define RANDOM_RANGE 2
+#define LEFT 2
+#define RANDOM_RANGE 10
+#define INIT_VEC_SIZE 10
 
-void delete_a_x(Vector *vec, int sheep)
+
+#if 1
+void reverse (Vector *vec, int from, int to)
 {
-    int k = 0, i;   // use k to store the value isn't the value
+    printf("[INFO]: Reversing from %d -> %d\n", from, to);
+    int i, temp;
+    for (int i = 0; i < (to - from + 1)/2; i++) {
 
-    for (int i = 0; i < vec->length; ++i) {
-         printf("sheep %d <=> vec->data[i]  %d\n", sheep, vec->data[i]);
+//        printf("i => %d\n",i);
+        temp = vec->data[from + i];
 
-         if (vec->data[i] != sheep) {
-             vec->data[k] = vec->data[i];
-             k++;
-         }
+        vec->data[from + i] = vec->data[to - i];
+
+        vec->data[to - i] = temp;
     }
-
-    vec->length = k;
+    print_out(vec);
+    printf("\n");
 }
 
+#endif
 
-
-
-void delete_a_x_2(Vector *vec, int sheep)
+#if 1
+void converse (Vector *vec, int n, int p)
 {
-    int k = 0, i  = 0;   // use k to store the value is the value
+    printf("====> 循环左移 %d 个位置 <==== \n", p);
 
-    while (i < vec->length) {
+    
+                                //     (A    B  )           // abc edfgh
+                               
+    reverse(vec, 0, p - 1);     //     (A-1  B  )           // cba edfgh
 
-         if (vec->data[i] == sheep) {
-             k++;
-         }
-         else {
-             vec->data[i - k] = vec->data[i];
-         }
+    reverse(vec, p, n - 1);     //     (A-1  B-1)           // cba ghfed
 
-         i++;
-    }
+    reverse(vec, 0, n - 1);     //     (A-1  B-1)-1 = ba    // defgh abc
 
-    vec->length = vec->length  - k;
 }
-
-
-
+#endif
 
 
 int main(void) 
 {
-    
-    /* genreate basic vector */ 
+/* genreate basic vector with the size of INIT_VEC_SIZE */ 
     srand(time(0));
-    Vector *vec  = init_vector(10);
-    for (int i = 0; i < 10; ++i) {
+    Vector *vec  = init_vector(INIT_VEC_SIZE);
+
+
+
+
+/* genreate random value from 0 to RANDOM_RANGE and fill into the vector*/
+#if 0
+    for (int i = 0; i < INIT_VEC_SIZE; ++i) {
         insert(vec, i, rand() % RANDOM_RANGE);
     }
+#endif
+
+
+
+
+/* genreate value from 0 to INIT_VEC_SIZE and fill into the vector */
+#if 1
+    for (int i = 0; i < INIT_VEC_SIZE; ++i) {
+        insert(vec, i, i);
+    }
+#endif
+
+
+
+    /* get the init STATUS */ 
     get_vec_status(vec);
 
-    /* delete a certain value */
-    // genreate a value TO delete
-    int sheep = rand() % RANDOM_RANGE; // Why sheep ? sheep are waiting to be KILL! 8)
-    printf("====> [SHEEP] %d\n", sheep);
+    /* move 2 to left */ 
+    converse(vec, vec->length, LEFT);
 
-
-    // 解法一
-    printf("====> [解法一] <==== \n");
-    delete_a_x(vec, sheep);
+    /* get the result STATUS */ 
     get_vec_status(vec);
 
-    // 解法二
-    printf("====> [解法二] <==== \n");
-    delete_a_x_2(vec, sheep);
-    get_vec_status(vec);
     return 0;
+
 }
-
-
-
 
 ```
 
+
 # Result
 ```txt
+
 ====> [VECTOR STATUS]: 
 Vector's current length = 10
 Vector's capacity = 10
-Vector(10) = [ 0  1  1  0  0  1  1  1  0  0 ]
+Vector(10) = [ 0  1  2  3  4  5  6  7  8  9 ]
 
-====> [SHEEP] 0
-====> [解法一] <==== 
-sheep 0 <=> vec->data[i]  0
-sheep 0 <=> vec->data[i]  1
-sheep 0 <=> vec->data[i]  1
-sheep 0 <=> vec->data[i]  0
-sheep 0 <=> vec->data[i]  0
-sheep 0 <=> vec->data[i]  1
-sheep 0 <=> vec->data[i]  1
-sheep 0 <=> vec->data[i]  1
-sheep 0 <=> vec->data[i]  0
-sheep 0 <=> vec->data[i]  0
-====> [VECTOR STATUS]: 
-Vector's current length = 5
-Vector's capacity = 10
-Vector(5) = [ 1  1  1  1  1 ]
+====> 循环左移 2 个位置 <==== 
+[INFO]: Reversing from 0 -> 1
+Vector(10) = [ 1  0  2  3  4  5  6  7  8  9 ]
 
-====> [解法二] <==== 
+[INFO]: Reversing from 2 -> 9
+Vector(10) = [ 1  0  9  8  7  6  5  4  3  2 ]
+
+[INFO]: Reversing from 0 -> 9
+Vector(10) = [ 2  3  4  5  6  7  8  9  0  1 ]
+
 ====> [VECTOR STATUS]: 
-Vector's current length = 5
+Vector's current length = 10
 Vector's capacity = 10
-Vector(5) = [ 1  1  1  1  1 ]
+Vector(10) = [ 2  3  4  5  6  7  8  9  0  1 ]
 
 ```
